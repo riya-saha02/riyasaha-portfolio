@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riya Saha | Dev Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0c29;
+            --glass-bg: rgba(20, 15, 45, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-cyan: #00f2fe;
+            --neon-pink: #fe0979;
+            --neon-purple: #8a2be2;
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-main);
+            background: var(--bg-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* High-Effort Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .bg-animation::before, .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: floatOrb 20s infinite alternate ease-in-out;
+        }
+
+        .bg-animation::before {
+            background: var(--neon-purple);
+            top: -100px; left: -100px;
+        }
+
+        .bg-animation::after {
+            background: var(--neon-pink);
+            bottom: -100px; right: -100px;
+            animation-delay: -10s;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(200px, 200px) scale(1.5); }
+        }
+
+        /* Container & Glassmorphism */
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg);
+            transition: 0.7s;
+        }
+
+        .glass-panel:hover::before {
+            left: 200%;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Typography & Colors */
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--neon-cyan);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-weight: bold;
+        }
+
+        /* Links & Buttons */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        /* Skills Tags */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: rgba(138, 43, 226, 0.2);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .meta-info {
+            font-family: monospace;
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            padding: 5px 12px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation"></div>
+
+<div class="container">
+    <header class="glass-panel" style="text-align: center; padding: 60px 20px;">
+        <h1>RIYA SAНА</h1><p style="font-size: 1.5rem; color: #fff; max-width: 600px; margin: 0 auto;">MCA student and aspiring Software Development Engineer</p><div class="social-links" style="justify-content: center; margin-top: 30px;">
+            <a href="mailto:riyasaha0203@gmail.com" title="Email"><i class="fas fa-envelope"></i></a><a href="https://github.com/riya-saha02" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a href="https://linkedin.com/in/riya-saha02" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a></div>
+    </header>
+
+    <section class="glass-panel">
+        <h2><i class="fas fa-user-astronaut"></i> System.out.println("About Me");</h2>
+        <p>Experienced in building full-stack applications with clean architecture, REST APIs, database integration, authentication, and deployment. [cite: 8] Passionate about solving real-world problems and contributing to scalable fintech-grade systems. [cite: 9] Strong fundamentals in OOP, DBMS, and Web Development. [cite: 7]</p>
+    </section>
+
+    <section class="glass-panel">
+        <h2><i class="fas fa-code"></i> Tech Stack</h2>
+        <div class="skills-wrapper">
+            <div class="skill-tag">Java [cite: 39]</div>
+            <div class="skill-tag">Python [cite: 39]</div>
+            <div class="skill-tag">JavaScript [cite: 39]</div>
+            <div class="skill-tag">Spring Boot [cite: 40]</div>
+            <div class="skill-tag">React.js [cite: 40]</div>
+            <div class="skill-tag">MySQL [cite: 41]</div>
+            <div class="skill-tag">REST APIs [cite: 43]</div>
+            <div class="skill-tag">Data Structures & Algorithms [cite: 43]</div>
+            <div class="skill-tag">OOPs [cite: 43]</div>
+            <div class="skill-tag">Git / GitHub [cite: 42]</div>
+        </div>
+    </section>
+
+    <section class="glass-panel">
+        <h2><i class="fas fa-briefcase"></i> Experience</h2>
+        
+        <div style="margin-bottom: 40px;">
+            <h3>Software Development Intern | Coal India Ltd (Ministry of Coal)</h3><div class="meta-info">May 2023 - July 2023 (3 Months)</div><ul>
+                <li>Built a full-stack web application using PHP (server-side) and MySQL database with modular structure. [cite: 17]</li>
+                <li>Followed clean coding practices with separation of frontend and backend logic. [cite: 18]</li>
+                <li>Improved performance by reducing redundant DB queries and using prepared statements. [cite: 19]</li>
+                <li>Collaborated with mentors to understand requirement flow and deliver functional modules on time. [cite: 20]</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Web Development Trainee | Teachnook</h3><div class="meta-info">January 2024 - February 2024</div><ul>
+                <li>Worked on responsive web pages, UI components, and form validations using HTML/CSS/JS. [cite: 26]</li>
+                <li>Implemented interactive features and optimized UI for better performance. [cite: 27]</li>
+                <li>Collaborated on mini-projects and followed structured development workflow. [cite: 28]</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="glass-panel">
+        <h2><i class="fas fa-rocket"></i> Featured Projects</h2>
+        <div class="grid-2">
+            
+            <div class="glass-panel" style="margin: 0; padding: 30px;">
+                <h3>Online Expense Tracker</h3><div class="meta-info">Java • Spring Boot • JavaFX • MySQL</div><ul>
+                    <li>Developed a full-stack application following layered architecture (Controller-Service-Repository). [cite: 32]</li>
+                    <li>Enabled secure expense management, reporting, and category-based insights using optimized SQL queries and RESTful APIs. [cite: 33]</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel" style="margin: 0; padding: 30px;">
+                <h3>Identity Sustainability Analysis</h3>
+                <div class="meta-info">Data Analysis • Statistical Reporting</div>
+                <ul>
+                    <li>Participated in the UIDAI Data Hackathon (2026), focusing on solving complex data challenges related to national identity systems.</li>
+                    <li>Executed comprehensive data cleaning, statistical analysis, and generated detailed project reports and presentations.</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel" style="margin: 0; padding: 30px; grid-column: 1 / -1;">
+                <h3>Weather Forecast Web App</h3><div class="meta-info">React.js • OpenWeather API • HTML/CSS</div><ul>
+                    <li>Designed a responsive weather app with real-time weather using REST API integration. [cite: 36]</li>
+                    <li>Handled edge cases like invalid cities, loading states, and API errors. [cite: 37]</li>
+                </ul>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="glass-panel">
+        <h2><i class="fas fa-graduation-cap"></i> Education Map</h2>
+        <ul>
+            <li><strong>Masters of Computer Applications</strong> — CDac, Noida (Pursuing, 2025-2027) [cite: 11]</li>
+            <li><strong>Bachelor of Computer Applications</strong> — BIT Mesra (80%, 2021-2024) [cite: 11]</li>
+            <li><strong>12th CBSE</strong> (87%, 2020-2021) [cite: 11]</li>
+            <li><strong>10th CBSE</strong> (89%, 2018-2019) [cite: 11]</li>
+        </ul>
+    </section>
+</div>
+
+</body>
+</html>
